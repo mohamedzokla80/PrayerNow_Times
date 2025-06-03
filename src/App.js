@@ -1,0 +1,97 @@
+import { useEffect, useState } from "react";
+import Prayer from "./component/Prayer"; 
+
+
+function App() {
+  const [prayerTimes, setPrayerTimes] = useState({});
+  const [dateTime, setDateTimes] = useState("");
+  const [city, setCity] = useState("Cairo");
+
+  const cities = [
+    { name: "القاهرة", value: "Cairo" },
+    { name: "الإسكندرية", value: "Alexandria" },
+    { name: "الجيزة", value: "Giza" },
+    { name: "الأقصر", value: "Luxor" },
+    { name: "أسوان", value: "Aswan" },
+    { name: "الشرقية", value: "Sharqih" },
+    { name: "المنيا", value: "Menia" },
+    { name: "الفيوم", value: "Faiyum" },
+    { name: "المنوفية", value: "Monufia" },
+    { name: "الغربية", value: "Gharbia" },
+    { name: "السويس", value: "Suez" },
+  ];
+
+  useEffect(() => {
+    const fetchPrayerTimes = async () => {
+      try {
+        
+        const response = await fetch(
+          `http://api.aladhan.com/v1/timingsByCity?city=${city}&country=Egypt&date=18-11-2024`
+        );
+        const data_Prayer = await response.json();
+        
+
+        if (data_Prayer.data && data_Prayer.data.timings) {
+          setPrayerTimes(data_Prayer.data.timings);
+          setDateTimes(data_Prayer.data.date.gregorian.date);
+        } else {
+          console.error("لا توجد بيانات صلاة.");
+        }
+        console.log(data_Prayer.data);
+      } catch (error) {
+        console.error("حدث خطأ في جلب البيانات: ", error);
+      }
+    };
+
+    fetchPrayerTimes();
+  }, [city]);
+
+  const formatTimes = (time) => {
+    if (!time) {
+      return "00:00";
+    }
+
+    let [hours, minutes] = time.split(":").map(Number); 
+    const period = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;  // تحويل الوقت إلى 12 ساعة (AM/PM)
+    return `${hours}:${minutes < 10 ? "0" + minutes : minutes} ${period}`;
+  };
+
+  return (
+    <section>
+      <div className="container">
+        <div className="top_sec">
+          <div className="city">
+            <h3>المدينة</h3>
+            <select
+              name="city"
+              id="city-select"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            >
+              {cities.map((city_Obj) => (
+                <option key={city_Obj.value} value={city_Obj.value}>
+                  {city_Obj.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="date">
+            <h3>التاريخ</h3>
+            <h4>{dateTime}</h4>
+          </div>
+        </div>
+
+        {/* مكونات عرض أوقات الصلاة */}
+        <Prayer name="الفجر" time={formatTimes(prayerTimes.Fajr)} />
+        <Prayer name="الظهر" time={formatTimes(prayerTimes.Dhuhr)} />
+        <Prayer name="العصر" time={formatTimes(prayerTimes.Asr)} />
+        <Prayer name="المغرب" time={formatTimes(prayerTimes.Maghrib)} />
+        <Prayer name="العشاء" time={formatTimes(prayerTimes.Isha)} />
+      </div>
+    </section>
+  );
+}
+
+export default App;

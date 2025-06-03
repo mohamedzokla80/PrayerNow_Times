@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Cairo", sans-serif;
+}
+
+html {
+  direction: rtl;
+}
+
+section {
+  background: url(assets/bg\ \(1\).jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* تحريك الـ container إلى اليسار */
+section .container {
+  width: 90%;
+  max-width: 650px;
+  background: rgba(51, 42, 34, 0.3);
+  padding: 30px 20px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(215, 215, 215, 0.3);
+  margin-left: 20%;
+}
+
+/* تنسيق الجزء العلوي */
+section .top_sec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  border-bottom: 2px solid rgba(215, 215, 215, 0.3); /* ✅ خط سفلي */
+}
+
+/* المدينة */
+section .top_sec h3 {
+  font-size: 26px;
+  color: #fff;
+}
+
+/* التاريخ */
+section .top_sec .date h4 {
+  font-size: 26px;
+  color: #fff;
+}
+
+/* القائمة المنسدلة */
+section .top_sec select {
+  width: 250px;
+  border-radius: 5px;
+  outline: none;
+  background: #a54f3a;
+  padding: 5px 10px;
+  color: #fff;
+  font-size: 22px;
+  margin-top: 10px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+section .top_sec select:hover {
+  background: #8c3d2b;
+}
+
+/* تصميم أوقات الصلاة */
+section .prayer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+  background: #c0583e75;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 22px;
+  border-radius: 5px;
+  border: 1px solid #d7d7d74e;
+  transition: all 0.5s ease-in-out;
+}
+
+section .prayer:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* جعل التاريخ فوق المدينة في الشاشات الصغيرة */
+@media (max-width: 600px) {
+  section .top_sec {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1.5px solid rgba(215, 215, 215, 0.3); /* ✅ خط أنحف */
+  }
+
+  section .container {
+    margin-left: 0;
+    width: 95%;
+    padding: 20px;
+  }
+
+  section .top_sec h3,
+  section .top_sec .date h4 {
+    font-size: 22px;
+  }
+
+  section .top_sec select {
+    width: 100%;
+    font-size: 20px;
+  }
+
+  section .prayer {
+    font-size: 20px;
+    padding: 8px 15px;
+  }
+}
+
+
+
+
+
+/* Tablet Devices */
+@media (max-width: 768px) {
+  section .container {
+    margin-left: 10%;
+    width: 95%;
+    padding: 25px;
+  }
+
+  section .top_sec h3,
+  section .top_sec .date h4 {
+    font-size: 24px;
+  }
+
+  section .top_sec select {
+    width: 220px;
+    font-size: 20px;
+  }
+
+  section .prayer {
+    padding: 12px 20px;
+    font-size: 20px;
+  }
+}
+
+/* Small Tablets and Large Phones */
+@media (max-width: 480px) {
+  section {
+    padding: 15px;
+  }
+
+  section .container {
+    margin-left: 0;
+    width: 100%;
+    padding: 15px;
+  }
+
+  section .top_sec {
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+  }
+
+  section .top_sec h3,
+  section .top_sec .date h4 {
+    font-size: 20px;
+  }
+
+  section .top_sec select {
+    width: 100%;
+    font-size: 18px;
+    margin-top: 8px;
+    padding: 4px 8px;
+  }
+
+  section .prayer {
+    padding: 8px 12px;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 320px) {
+  section .container {
+    padding: 10px;
+  }
+
+  section .top_sec h3,
+  section .top_sec .date h4 {
+    font-size: 18px;
+  }
+
+  section .top_sec select {
+    font-size: 16px;
+  }
+
+  section .prayer {
+    font-size: 16px;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+  }
+}
