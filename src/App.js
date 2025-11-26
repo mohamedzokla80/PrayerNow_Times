@@ -26,7 +26,7 @@ function App() {
       try {
         
         const response = await fetch(
-          `http://api.aladhan.com/v1/timingsByCity?city=${city}&country=Egypt&date=18-11-2024`
+          `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Egypt&date=18-11-2024`
         );
         const data_Prayer = await response.json();
         
